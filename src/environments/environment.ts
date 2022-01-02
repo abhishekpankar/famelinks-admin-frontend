@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_URL:"https://localhost:8080"
+  BASE_URL:"FameLinks.in:3000/v1/"
 };
 
 /*

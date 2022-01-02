@@ -7,10 +7,10 @@ export class ApiCollection {
 
     // Users
 
-    public static ALL_USERS = '/get/allUser';
+    public static GET_CATERGORY = 'challenges/getChallengesData';
 
-    public static UPDATE_USER = '/user/';
+    public static UPDATE_CATERGORY = 'challenges/updateChallenges';
 
-    public static CREATE_USER = '/user';
+    public static CREATE_CATERGORY = 'challenges/addNewChallenges';
 
 }

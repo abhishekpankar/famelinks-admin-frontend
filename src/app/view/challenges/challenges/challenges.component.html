@@ -87,8 +87,7 @@
             </div>
             <div class="p-4">
               <button type="submit" mat-raised-button color="primary" matTooltip="Submit record">Submit</button>
-              <button type="submit" class="btn btn-danger ml-2" mat-raised-button color="warn"
-                matTooltip="Clear record">Clear</button>
+              <button  type="button" class="btn btn-danger ml-2" mat-raised-button color="warn" (click)="clearForm()" matTooltip="Clear record">Clear</button>
             </div>
           </form>
         </mat-tab>
@@ -131,7 +130,7 @@
                 <td>{{data.startDate}}</td>
                 <td>{{data.endDate}}</td>
                 <td>
-                  <mat-slide-toggle [(ngModel)]="data.isDeleted" name="isDeleted" (change)="activate($event,data)"></mat-slide-toggle>
+                  <mat-slide-toggle [(ngModel)]="!data.isDeleted" name="isDeleted" (change)="activate($event,data.id)"></mat-slide-toggle>
                 </td>
                 <td>
                   <mat-icon aria-hidden="false" aria-label="Edit Coupon" (click)="updateChallenge(data)">edit</mat-icon>

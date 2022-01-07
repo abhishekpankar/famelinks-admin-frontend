@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_URL:"FameLinks.in:3000/v1/"
+  BASE_URL:"http://adminapi.famelinks.in:3000/v1/"
 };
 
 /*

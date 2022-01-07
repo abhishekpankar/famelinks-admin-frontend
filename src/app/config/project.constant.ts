@@ -12,5 +12,7 @@ export class ApiCollection {
     public static UPDATE_CATERGORY = 'challenges/updateChallenges';
 
     public static CREATE_CATERGORY = 'challenges/addNewChallenges';
+    
+    public static DELETE_CATERGORY = 'challenges/deleteChallenges';
 
 }

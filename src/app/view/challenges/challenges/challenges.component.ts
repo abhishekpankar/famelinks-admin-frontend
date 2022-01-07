@@ -85,6 +85,7 @@ export class ChallengesComponent implements OnInit {
         this.challengeService.createChallenge(requestData).subscribe((response: any) => {
           if (response.status && response.responseCode == 200) {
             this.sweetMsg.showSuccess(response.message);
+            this.clearForm()
           } else if (response.status && response.responseCode != 200) {
             this.sweetMsg.showError(response.message);
           } else if (!response.status) {
@@ -94,6 +95,7 @@ export class ChallengesComponent implements OnInit {
       } else {
         this.challengeService.updateChallenge(requestData).subscribe((response: any) => {
           if (response.status && response.responseCode == 200) {
+            this.clearForm();
             this.sweetMsg.showSuccess(response.message);
           } else {
             this.sweetMsg.showError(response.message);
@@ -105,21 +107,34 @@ export class ChallengesComponent implements OnInit {
 
   }
 
-  activate(event: any, data: any) {
-
+  activate(event: any, id: string) {
+    console.log("event : ",event.value , "data : ",id);
+   let isDeleteConfirm : boolean=confirm("Are you sure you want to delete this item?");
+ console.log("isDeleteConfirm ",isDeleteConfirm);
+ 
+   if(isDeleteConfirm){ 
+   this.challengeService.deleteChallenge(id).subscribe((response: any) => {
+      if (response.sucess) {
+        this.getChallengeList()
+        this.sweetMsg.showSuccess(response.message);
+      } else {
+        this.sweetMsg.showError(response.message);
+      }
+    })
+  }
   }
 
   async updateChallenge(data: any) {
     console.log("data",data);
-    // if(data.sponsor.length > 0){
+    if(data.sponsor.length > 0){
       
-    //   this.sponsorsTag=data.sponsor.map((s:string)=>{return {"name":s}}) 
-    // }
+      this.sponsorsTag=data.sponsor.map((s:string)=>{return {"name":s}}) 
+    }
     if(data.hashTag.length > 0){
       this.searchTag=data.hashTag.map((s:string)=>{return {"name":s}}) 
     }
     this.challengesForm.patchValue({
-      id: data._id,
+      id: data.id,
       name: data.name,
       sponsor: data.sponsor,
       description: data.description,
@@ -143,155 +158,9 @@ export class ChallengesComponent implements OnInit {
       "filterFromDate": new Date(),
       "filterToDate": new Date()
     }
-    // this.challengeService.getChallengeList(requestObj).subscribe(response => {
-      // if (response.success) {
-        let response1 =  [
-          {
-              "_id": "6158349b50592e88c2b01ce5",
-              "name": "Beautiful Smile",
-              "sponsor": "Trends",
-              "description": "test",
-              "reward": "nothing",
-              "startDate": "2020-10-02T10:30:50.019Z",
-              "endDate": "2022-10-02T10:30:50.019Z",
-              "type": "famelinks",
-              "image": "test",
-              "hashTag": [
-                  "fun",
-                  "rocking"
-              ],
-              "for": [
-                  "male",
-                  "female"
-              ],
-              "mediaPreference": [
-                  "photo",
-                  "video"
-              ],
-              "isDeleted": false
-          },
-          {
-              "_id": "6158349b50592e88c2b01ce6",
-              "name": "Study Look",
-              "sponsor": "Trends",
-              "description": "test",
-              "reward": "nothing",
-              "startDate": "2020-10-02T10:30:50.019Z",
-              "endDate": "2021-01-01T10:30:50.019Z",
-              "type": "famelinks",
-              "image": "test",
-              "hashTag": [
-                  "fun",
-                  "rocking"
-              ],
-              "for": [
-                  "male",
-                  "female"
-              ],
-              "mediaPreference": [
-                  "photo",
-                  "video"
-              ],
-              "isDeleted": false
-          },
-          {
-              "_id": "615a9d6d3409ff68a91bfe19",
-              "name": "High Jump Freeze",
-              "sponsor": "Trends",
-              "description": "test",
-              "reward,": "nothing",
-              "startDate": "2020-10-02T10:30:50.019Z",
-              "endDate": "2022-10-02T10:30:50.019Z",
-              "type": "famelinks",
-              "image": "test",
-              "hashTag": [
-                  "fun",
-                  "rocking"
-              ],
-              "for": [
-                  "male",
-                  "female"
-              ],
-              "mediaPreference": [
-                  "photo",
-                  "video"
-              ],
-              "isDeleted": false
-          },
-          {
-              "_id": "615a9d6d3409ff68a91bfe1a",
-              "name": "Inspirational Look",
-              "sponsor": "Trends",
-              "description": "test",
-              "reward": "nothing",
-              "startDate": "2020-10-02T10:30:50.019Z",
-              "endDate": "2022-10-02T10:30:50.019Z",
-              "type": "famelinks",
-              "image": "test",
-              "hashTag": [
-                  "fun",
-                  "rocking"
-              ],
-              "for": [
-                  "male",
-                  "female"
-              ],
-              "mediaPreference": [
-                  "photo",
-                  "video"
-              ],
-              "isDeleted": false
-          },
-          {
-              "_id": "615a9d6d3409ff68a91bfe1b",
-              "name": "Crazy Mind",
-              "sponsor": "Trends",
-              "description": "test",
-              "reward": "nothing",
-              "startDate": "2020-10-02T10:30:50.019Z",
-              "endDate": "2022-10-02T10:30:50.019Z",
-              "type": "famelinks",
-              "image": "test",
-              "hashTag": [
-                  "fun",
-                  "rocking"
-              ],
-              "for": [
-                  "male",
-                  "female"
-              ],
-              "mediaPreference": [
-                  "photo",
-                  "video"
-              ],
-              "isDeleted": false
-          },
-          {
-              "_id": "619a1ad359722ef5592bb435",
-              "name": "Inspirational Look",
-              "sponsor": "Trends",
-              "description": "test",
-              "reward": "nothing",
-              "startDate": "2020-10-02T10:30:50.019Z",
-              "endDate": "2022-10-02T10:30:50.019Z",
-              "type": "funlinks",
-              "image": "test",
-              "hashTag": [
-                  "fun",
-                  "rocking"
-              ],
-              "for": [
-                  "male",
-                  "female"
-              ],
-              "mediaPreference": [
-                  "photo",
-                  "video"
-              ],
-              "isDeleted": false
-          }
-      ]
-        this.challengeList = response1.map((doc: any) => {
+    this.challengeService.getChallengeList(requestObj).subscribe(response => {
+      if (response.success) {
+        this.challengeList = response['result'].map((doc: any) => {
           return {
             id: doc._id,
             name: doc.name,
@@ -308,8 +177,8 @@ export class ChallengesComponent implements OnInit {
             isDeleted: doc.isDeleted,
           }
         })
-      // }
-    // })
+      }
+    })
   }
   addTag(event: MatChipInputEvent, val: String): void {
     const input = event.input;
@@ -340,4 +209,12 @@ export class ChallengesComponent implements OnInit {
       this.sponsorsTag.splice(index, 1);
     }
   }
+
+  
+clearForm(){
+  this.challengesForm.reset();
+  this.searchTag = [];
+  this.sponsorsTag = [];
+  new Challenges()
+}
 }

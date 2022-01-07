@@ -20,4 +20,9 @@ export class ChallengeService {
   updateChallenge( data: any){
     return this.appConfigServices.patchService(ApiCollection.UPDATE_CATERGORY, data);
   }
+
+  deleteChallenge(id:string){
+    return this.appConfigServices.deleteService(ApiCollection.DELETE_CATERGORY, {"challengeId":id});
+
+  }
 }

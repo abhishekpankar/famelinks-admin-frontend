@@ -36,5 +36,7 @@ export class AppConfigServices {
     patchService = (apiUrl: string, apiData?: any, httpOptions?: any) : Observable<any> => {
         return this.httpRequest.patch(this.baseUrl + apiUrl, apiData);
     }
-
+    deleteService = (apiUrl: string, apiData?: any, httpOptions?: any) : Observable<any> => {
+        return this.httpRequest.delete(this.baseUrl + apiUrl, apiData);
+    }
 }

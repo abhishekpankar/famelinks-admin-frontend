@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+    this.isLonginSucess = false;
     this.loginFormGroup = new FormGroup({
       userId: new FormControl('', [
         Validators.required,

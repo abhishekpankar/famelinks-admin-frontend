@@ -14,16 +14,21 @@ const routes: Routes = [
         loadChildren: () => import('./view/dashboard/dashboard.module').then(mod => mod.DashboardModule),
         data: { title: 'dashboard' },
         // 'canActivate': [AuthGuard],
-      },    {
+      },{
         path: 'challenges',
         loadChildren: () => import('./view/challenges/challenges.module').then(mod => mod.ChallengesModule),
         data: { title: 'challenges' },
+        //'canActivate': [AuthGuard]
+      },{
+        path: 'users',
+        loadChildren: () => import('./view/users/users.module').then(mod => mod.UsersModule),
+        data: { title: 'users' },
         //'canActivate': [AuthGuard]
       },
       ]
     },
 
-  { path: '**',   redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '**',   redirectTo: '/login', pathMatch: 'full' },
  ];
     
 @NgModule({

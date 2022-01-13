@@ -66,35 +66,34 @@
                 </mat-form-field>
               </div>
             </div>
-            <div class = "row p-4">
+            <div class="row p-4">
               <div class="col-sm-12">
                 <mat-form-field class="example-chip-list">
                   <mat-label>Sponsors</mat-label>
                   <mat-chip-list #chipList1 aria-label="Sponsor selection" formControlName="sponsor">
-                    <mat-chip *ngFor="let fruit of sponsorsTag" [selectable]="selectable"
-                             [removable]="removable" (removed)="removeTag(fruit,'Sponsors')">
+                    <mat-chip *ngFor="let fruit of sponsorsTag" [selectable]="selectable" [removable]="removable"
+                      (removed)="removeTag(fruit,'Sponsors')">
                       {{fruit.name}}
                       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>
-                    <input placeholder="Sponsor List..."
-                           [matChipInputFor]="chipList1"
-                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                           [matChipInputAddOnBlur]="addOnBlur"
-                           (matChipInputTokenEnd)="addTag($event,'Sponsors')">
+                    <input placeholder="Sponsor List..." [matChipInputFor]="chipList1"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="addTag($event,'Sponsors')">
                   </mat-chip-list>
                 </mat-form-field>
               </div>
             </div>
             <div class="p-4">
               <button type="submit" mat-raised-button color="primary" matTooltip="Submit record">Submit</button>
-              <button  type="button" class="btn btn-danger ml-2" mat-raised-button color="warn" (click)="clearForm()" matTooltip="Clear record">Clear</button>
+              <button type="button" class="btn btn-danger ml-2" mat-raised-button color="warn" (click)="clearForm()"
+                matTooltip="Clear record">Clear</button>
             </div>
           </form>
         </mat-tab>
         <mat-tab label="Challenges List">
           <div class="row p-4">
             <div class="row m-3">
-              <mat-form-field >
+              <mat-form-field>
                 <mat-label>Select Filter</mat-label>
                 <mat-select [(ngModel)]="SFCatFilter" name="challenge">
                   <mat-option *ngFor="let obj of SFCatFilterList" [value]="obj.value">
@@ -103,9 +102,10 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            
+
             <div class="row m-3" style="height:10px">
-              <button mat-raised-button color="primary" matTooltip="Show Challenges" (click)="getChallengeList()">Show Challenges</button>
+              <button mat-raised-button color="primary" matTooltip="Show Challenges" (click)="getChallengeList()">Show
+                Challenges</button>
             </div>
           </div>
           <table id="example1" class="table table-bordered table-striped" *ngIf="challengeList.length > 0 ">
@@ -130,7 +130,8 @@
                 <td>{{data.startDate}}</td>
                 <td>{{data.endDate}}</td>
                 <td>
-                  <mat-slide-toggle [(ngModel)]="!data.isDeleted" name="isDeleted" (change)="activate($event,data.id)"></mat-slide-toggle>
+                  <mat-slide-toggle [(ngModel)]="!data.isDeleted" name="isDeleted" (change)="activate($event,data.id)">
+                  </mat-slide-toggle>
                 </td>
                 <td>
                   <mat-icon aria-hidden="false" aria-label="Edit Coupon" (click)="updateChallenge(data)">edit</mat-icon>

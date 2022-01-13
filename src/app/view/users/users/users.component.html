@@ -1,0 +1,73 @@
+<div class="row p-2">
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Users</h3>
+            </div>
+            <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabClick($event)">
+                <mat-tab label="User Profile">
+                </mat-tab>
+                <mat-tab label="Users List">
+                    <div class="row p-4">
+                      <div class="row m-3">
+                        <mat-form-field>
+                          <mat-label>Select Filter</mat-label>
+                          <mat-select [(ngModel)]="SFCatFilter" name="user">
+                            <mat-option *ngFor="let obj of SFCatFilterList" [value]="obj.value">
+                              {{obj.key}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+          
+                      <div class="row m-3" style="height:10px">
+                        <button mat-raised-button color="primary" matTooltip="Show Users" (click)="getUsersList()">Show
+                          Users</button>
+                      </div>
+                    </div>
+                    <table id="example1" class="table table-bordered table-striped" *ngIf="userList.length > 0 ">
+                      <thead>
+                        <tr>
+                          <th>Sr.No.</th>
+                          <th>Name</th>
+                          <th>User Name</th>
+                          <th>Mobile Number</th>
+                          <th>Gender</th>
+                          <th>Blocked</th>
+                          <th>Verified</th>
+                          <!-- <th>Referred By</th> -->
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of userList; let index = index">
+                          <td>{{index + 1}}</td>
+                          <td>{{data.name ? data.name : "NA"}}</td>
+                          <td>{{data.username ? data.username : "NA"}}</td>
+                          <td>{{data.mobileNumber ? data.mobileNumber :"NA"}}</td>
+                          <td>{{data.gender ? data.gender : "NA"}}</td>
+                          <td>{{data.isBlocked ?  "Yes" : "No"}}</td>
+                          <td>{{data.isVerified ? "Yes" : "No"}}</td>
+                          <!-- <td>{{data.referredBy}}</td> -->
+                          <td><video width="100" height="100" controls>
+                            <source [src]="data.verificationVideoUrl" type="video/mp4">
+                          </video></td>
+                          <!-- <td>
+                            <mat-slide-toggle [(ngModel)]="!data.isDeleted" name="isDeleted" (change)="activate($event,data.id)">
+                            </mat-slide-toggle>
+                          </td> -->
+                          <td>
+                            <mat-icon aria-hidden="false" aria-label="Edit User" (click)="updateChallenge(data)">edit</mat-icon>
+                            <!-- <span class="text-blue" (click)="updateBrand(data, index)">Edit
+                            </span>
+                            <span class="ml-2 text-blue" (click)="deleteBrand(index)">Delete
+                            </span> -->
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                </mat-tab-group>
+        </div>
+    </div>
+</div>

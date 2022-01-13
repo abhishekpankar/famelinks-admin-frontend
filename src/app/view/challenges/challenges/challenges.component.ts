@@ -32,7 +32,8 @@ export class ChallengesComponent implements OnInit {
   mediaPreferenceList: string[] = ['photo', 'video']
   challengeList: any = []
   SFCatFilter: string = "ALL";
-  SFCatFilterList: any[] = [{ "key": "ALL", "value": "ALL" }, { "key": "NAME", "value": "NAME" }, { "key": "SPONSOR", "value": "SPONSOR" }
+  SFCatFilterList: any[] = [{ "key": "ALL", "value": "ALL" },
+  // { "key": "NAME", "value": "NAME" }, { "key": "SPONSOR", "value": "SPONSOR" }
     // ,{"key":"START DATE","value":"START_DATE"},{"key":"END DATE","value":"END_DATE"}
   ];
 
@@ -68,7 +69,7 @@ export class ChallengesComponent implements OnInit {
       let requestData: Challenges = {
         id: submitForm.value.id,
         name: submitForm.value.name,
-        sponsor: this.sponsorsTag.length > 0 ? this.sponsorsTag.map(doc => doc.name) : [],
+        sponsor: this.sponsorsTag.length > 0 ? this.sponsorsTag.map(doc => doc.name) : "",
         description: submitForm.value.description,
         reward: submitForm.value.reward,
         startDate: submitForm.value.startDate,
@@ -83,18 +84,16 @@ export class ChallengesComponent implements OnInit {
 
       if (!requestData.id) {
         this.challengeService.createChallenge(requestData).subscribe((response: any) => {
-          if (response.status && response.responseCode == 200) {
+          if (response.success ) {
             this.sweetMsg.showSuccess(response.message);
-            this.clearForm()
-          } else if (response.status && response.responseCode != 200) {
-            this.sweetMsg.showError(response.message);
-          } else if (!response.status) {
+            this.clearForm();
+          } else {
             this.sweetMsg.showError(response.message);
           }
         })
       } else {
         this.challengeService.updateChallenge(requestData).subscribe((response: any) => {
-          if (response.status && response.responseCode == 200) {
+          if (response.success) {
             this.clearForm();
             this.sweetMsg.showSuccess(response.message);
           } else {
@@ -108,39 +107,39 @@ export class ChallengesComponent implements OnInit {
   }
 
   activate(event: any, id: string) {
-    console.log("event : ",event.value , "data : ",id);
-   let isDeleteConfirm : boolean=confirm("Are you sure you want to delete this item?");
- console.log("isDeleteConfirm ",isDeleteConfirm);
- 
-   if(isDeleteConfirm){ 
-   this.challengeService.deleteChallenge(id).subscribe((response: any) => {
-      if (response.sucess) {
-        this.getChallengeList()
-        this.sweetMsg.showSuccess(response.message);
-      } else {
-        this.sweetMsg.showError(response.message);
-      }
-    })
-  }
+    console.log("event : ", event.value, "data : ", id);
+    let isDeleteConfirm: boolean = confirm("Are you sure you want to delete this item?");
+    console.log("isDeleteConfirm ", isDeleteConfirm);
+
+    if (isDeleteConfirm) {
+      this.challengeService.deleteChallenge(id).subscribe((response: any) => {
+        if (response.sucess) {
+          this.getChallengeList()
+          this.sweetMsg.showSuccess(response.message);
+        } else {
+          this.sweetMsg.showError(response.message);
+        }
+      })
+    }
   }
 
   async updateChallenge(data: any) {
-    console.log("data",data);
-    if(data.sponsor.length > 0){
-      
-      this.sponsorsTag=data.sponsor.map((s:string)=>{return {"name":s}}) 
-    }
-    if(data.hashTag.length > 0){
-      this.searchTag=data.hashTag.map((s:string)=>{return {"name":s}}) 
+    console.log("data", data);
+    // if (data.sponsor.length > 0) {
+    //   this.sponsorsTag = data.sponsor.map((s: string) => { return { "name": s } })
+    // }
+    if (data.hashTag.length > 0) {
+      this.searchTag = data.hashTag.map((s: string) => { return { "name": s } })
     }
     this.challengesForm.patchValue({
       id: data.id,
       name: data.name,
-      sponsor: data.sponsor,
+      // sponsor: data.sponsor,
+      sponsor: "",
       description: data.description,
       reward: data.reward,
       startDate: new Date(data.startDate),
-      endDate:new Date(data.endDate) ,
+      endDate: new Date(data.endDate),
       type: data.type,
       image: data.image,
       hashTag: data.hashTag,
@@ -159,7 +158,7 @@ export class ChallengesComponent implements OnInit {
       "filterToDate": new Date()
     }
     this.challengeService.getChallengeList(requestObj).subscribe(response => {
-      if (response.success) {
+      if (response.success &&  response['result'].length > 0) {
         this.challengeList = response['result'].map((doc: any) => {
           return {
             id: doc._id,
@@ -167,8 +166,8 @@ export class ChallengesComponent implements OnInit {
             sponsor: doc.sponsor,
             description: doc.description,
             reward: doc.reward,
-            startDate: new Date(doc.startDate).toISOString().slice(0,10),
-            endDate:new Date(doc.endDate).toISOString().slice(0,10) ,
+            startDate: new Date(doc.startDate).toISOString().slice(0, 10),
+            endDate: new Date(doc.endDate).toISOString().slice(0, 10),
             type: doc.type,
             image: doc.image,
             hashTag: doc.hashTag,
@@ -177,6 +176,9 @@ export class ChallengesComponent implements OnInit {
             isDeleted: doc.isDeleted,
           }
         })
+        this.sweetMsg.showSuccess(response.message);
+      }else{
+        this.sweetMsg.showError("Oops, No search result found !!");
       }
     })
   }
@@ -210,11 +212,11 @@ export class ChallengesComponent implements OnInit {
     }
   }
 
-  
-clearForm(){
-  this.challengesForm.reset();
-  this.searchTag = [];
-  this.sponsorsTag = [];
-  new Challenges()
-}
+
+  clearForm() {
+    this.challengesForm.reset();
+    this.searchTag = [];
+    this.sponsorsTag = [];
+    new Challenges()
+  }
 }

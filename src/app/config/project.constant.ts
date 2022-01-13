@@ -5,7 +5,7 @@ export class AppConstant {
 
 export class ApiCollection {
 
-    // Users
+    // category routes
 
     public static GET_CATERGORY = 'challenges/getChallengesData';
 
@@ -15,4 +15,10 @@ export class ApiCollection {
     
     public static DELETE_CATERGORY = 'challenges/deleteChallenges';
 
+    //users routes
+    public static GET_USRS = 'users/getUsers';
 }
+
+export class BucketConstants {
+    public static PROFILE_VERIFICATION_URL = 'https://famelinks-dev.s3.ap-south-1.amazonaws.com/profile-images/';
+};

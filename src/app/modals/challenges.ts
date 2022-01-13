@@ -1,7 +1,7 @@
 export class Challenges {
     id?: string
     name?: string
-    sponsor?: any[]
+    sponsor?: any
     description?: string
     reward?: string
     startDate?: Date

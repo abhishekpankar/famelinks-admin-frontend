@@ -13,7 +13,7 @@ export class AppComponent {
     //To get current route when hashstrategy is used
     this.router.events.subscribe((event) => {   
       if (event instanceof NavigationEnd && event.url === '/'){
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/login');
       } 
       else if (event instanceof NavigationEnd){
         let head = event.url.replace('/','').replace('_','');

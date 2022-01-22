@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CommonService } from 'src/app/services/common/common.service';
 import { SweetAlertsService } from 'src/app/services/sweetMsg/sweet-alerts.service';
@@ -11,7 +12,7 @@ import { SweetAlertsService } from 'src/app/services/sweetMsg/sweet-alerts.servi
 export class HeaderComponent implements OnInit {
 
   heading: string = '';
-  constructor(private commonService: CommonService, private sweetService: SweetAlertsService, private authService: AuthService) {
+  constructor(private commonService: CommonService, private route: Router, private sweetService: SweetAlertsService, private authService: AuthService) {
     this.commonService.getHeading().subscribe((res: any)=>{
       this.heading = res;
     })
@@ -26,7 +27,8 @@ export class HeaderComponent implements OnInit {
     result =  await this.sweetService.confirmMsg('Do you want to Logout?');
     console.log("Result",result)
     if(result == 1){
-      // this.authService.signOut();
+      this.route.navigate(['/login']);
+      this.sweetService.showInfo('Logout sucessfully!');
     }
   }
 

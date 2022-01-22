@@ -46,11 +46,13 @@ export class SideNavComponent implements OnInit {
     $('[data-widget="treeview"]').Layout('init');
     $('[data-widget="treeview"]').PushMenu('init');
  
+    this.adminData['username'] = "Famelinks Admin";
+
     let menu = [
       {moduleName: 'Dashboard', childMenu: [], url:'/dashboard'},
       {moduleName: 'Challenges', childMenu: [], url:'/challenges'},
       {moduleName: 'Users', childMenu: [], url:'/users'},
-
+      {moduleName: 'ReportedData', childMenu: [], url:'/reported-data'},
     ]
     this.navMenu = menu;
   }

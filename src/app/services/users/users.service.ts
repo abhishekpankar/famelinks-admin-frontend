@@ -12,4 +12,7 @@ export class UsersService {
   getUserList(requestData:any){
     return this.appConfigServices.postService(ApiCollection.GET_USRS,requestData);
   }
+  verifyUser(requestData:any){
+    return this.appConfigServices.putService(ApiCollection.VERIFY_USRS,requestData);
+  }
 }

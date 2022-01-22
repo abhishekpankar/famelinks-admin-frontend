@@ -1,0 +1,131 @@
+<div class="row p-2">
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Reported Data</h3>
+            </div>
+            <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabClick($event)">
+                <mat-tab label="Reported User">
+                    <div class="row p-4">
+                        <div class="row m-3">
+                          <mat-form-field>
+                            <mat-label>Select Filter</mat-label>
+                            <mat-select [(ngModel)]="SFReportedUserFilter" name="ReportedUser">
+                              <mat-option *ngFor="let obj of SFReportedUserFilterList" [value]="obj.value">
+                                {{obj.key}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+            
+                        <div class="row m-3" style="height:10px">
+                          <button mat-raised-button color="primary" matTooltip="Load Reported Users" (click)="getReportedList('ReportedUser')">Load</button>
+                        </div>
+                      </div>
+                      <table id="example1" class="table table-bordered table-striped" *ngIf="reportedUsersList.length > 0 ">
+                        <thead>
+                          <tr>
+                            <th>Sr.No.</th>
+                            <th>User Name</th>
+                            <th>Reported Count</th>
+                            <th>Profile Photo</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of reportedUsersList; let index = index">
+                            <td>{{index + 1}}</td>
+                            <td>{{data.usesrName}}</td>
+                            <td>{{data.reportedCount}}</td>
+                            <td>{{data.reportedCount}}</td>
+                            <td>
+                              <mat-icon aria-hidden="false" aria-label="Edit">edit</mat-icon>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </mat-tab>
+                <mat-tab label="Reported Post">
+                    <div class="row p-4">
+                        <div class="row m-3">
+                          <mat-form-field>
+                            <mat-label>Select Filter</mat-label>
+                            <mat-select [(ngModel)]="SFReportedPostFilter" name="ReportedPost">
+                              <mat-option *ngFor="let obj of SFReportedPostFilterList" [value]="obj.value">
+                                {{obj.key}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+            
+                        <div class="row m-3" style="height:10px">
+                          <button mat-raised-button color="primary" matTooltip="Load Reported Post" (click)="getReportedList('ReportedPost')">Load</button>
+                        </div>
+                      </div>
+                      <table id="example2" class="table table-bordered table-striped" *ngIf="reportedPostList.length > 0 ">
+                        <thead>
+                          <tr>
+                            <th>Sr.No.</th>
+                            <th>User Name</th>
+                            <th>Reported Count</th>
+                            <th>Reported Post</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of reportedPostList; let index = index">
+                            <td>{{index + 1}}</td>
+                            <td>{{data.usesrName}}</td>
+                            <td>{{data.reportedCount}}</td>
+                            <td>{{data.reportedPost}}</td>
+                            <td>
+                              <mat-icon aria-hidden="false" aria-label="Edit">edit</mat-icon>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </mat-tab>
+                <mat-tab label="Reported Comment">
+                    <div class="row p-4">
+                        <div class="row m-3">
+                          <mat-form-field>
+                            <mat-label>Select Filter</mat-label>
+                            <mat-select [(ngModel)]="SFReportedCmtFilter" name="reportedComment">
+                              <mat-option *ngFor="let obj of SFReportedCmtFilterList" [value]="obj.value">
+                                {{obj.key}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+            
+                        <div class="row m-3" style="height:10px">
+                          <button mat-raised-button color="primary" matTooltip="Show Reported Comment" (click)="getReportedList('ReportedComment')">Load</button>
+                        </div>
+                      </div>
+                      <table id="example3" class="table table-bordered table-striped" *ngIf="reportedCommentList.length > 0 ">
+                        <thead>
+                          <tr>
+                            <th>Sr.No.</th>
+                            <th>User Name</th>
+                            <th>Reported Count</th>
+                            <th>Reported Comment</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of reportedCommentList; let index = index">
+                            <td>{{index + 1}}</td>
+                            <td>{{data.usesrName}}</td>
+                            <td>{{data.reportedCount}}</td>
+                            <td>{{data.reportedComment}}</td>
+                            <td>
+                              <mat-icon aria-hidden="false" aria-label="Edit">edit</mat-icon>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </mat-tab>
+            </mat-tab-group>    
+        </div>
+    </div>
+</div>

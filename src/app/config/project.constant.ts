@@ -17,6 +17,8 @@ export class ApiCollection {
 
     //users routes
     public static GET_USRS = 'users/getUsers';
+    
+    public static VERIFY_USRS ='users/updateUserProfileVerification'
 }
 
 export class BucketConstants {

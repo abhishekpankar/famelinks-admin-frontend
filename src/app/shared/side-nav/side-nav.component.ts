@@ -53,6 +53,7 @@ export class SideNavComponent implements OnInit {
       {moduleName: 'Challenges', childMenu: [], url:'/challenges'},
       {moduleName: 'Users', childMenu: [], url:'/users'},
       {moduleName: 'ReportedData', childMenu: [], url:'/reported-data'},
+      {moduleName: 'Notification', childMenu: [], url:'/notifications'},
     ]
     this.navMenu = menu;
   }

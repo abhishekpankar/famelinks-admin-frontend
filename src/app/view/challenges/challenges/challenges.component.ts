@@ -182,6 +182,7 @@ export class ChallengesComponent implements OnInit {
       }
     })
   }
+  
   addTag(event: MatChipInputEvent, val: String): void {
     const input = event.input;
     const value = event.value;
@@ -211,7 +212,6 @@ export class ChallengesComponent implements OnInit {
       this.sponsorsTag.splice(index, 1);
     }
   }
-
 
   clearForm() {
     this.challengesForm.reset();

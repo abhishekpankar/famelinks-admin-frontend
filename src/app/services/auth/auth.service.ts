@@ -23,7 +23,7 @@ export interface userRole{
   providedIn: 'root'
 })
 export class AuthService {
-  // admin$: Observable<Admin>;
+  admin$!: Observable<Admin>;
 }
 
 

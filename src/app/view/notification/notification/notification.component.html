@@ -1,0 +1,97 @@
+<div class="row p-2">
+    <div class="col-md-12">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Create Notification</h3>
+        </div>
+        <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabClick($event)">
+            <mat-tab label="Create Notification">
+                <form [formGroup]="notificationForm" (ngSubmit)="SubmitNotification(notificationForm)" id="notificationFormID">
+                    <div class="row p-4">
+                        <div class="col-sm-2">
+                            <mat-form-field>
+                              <mat-label>Send To</mat-label>
+                              <mat-select formControlName="userType">
+                                <mat-option *ngFor="let userTypes of sendToUsers" [value]="userTypes.value">
+                                  {{userTypes.key}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        <div class="col-sm-10">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Notification Title</mat-label>
+                              <input matInput placeholder="Enter Title" name="title" formControlName="title">
+                              <bfv-messages class="error-msg"></bfv-messages>
+                            </mat-form-field>
+                          </div>
+                    </div>   
+                    <div class="row p-4">
+                        <div class="col-sm-2">
+                            <mat-label style="display: none;">Select Image</mat-label>
+                            <br>
+                            <button  mat-raised-button color="primary" matTooltip="select file.." (click)="fileInput.click()">
+                                <md-icon>Browes..</md-icon>
+                                <input #fileInput type="file"  style="display:none;" />
+                              </button>
+                          </div>
+                        <div class="col-sm-10">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Body</mat-label>
+                              <textarea matInput placeholder="Enter Notification Body..." name="notificationBody" formControlName="body"></textarea>
+                              <bfv-messages class="error-msg"></bfv-messages>
+                            </mat-form-field>
+                          </div>
+                    </div> 
+                    <div class="p-4" style="text-align: center;">
+                        <button type="submit" mat-raised-button color="primary" matTooltip="Submit record">Submit</button>
+                        <button type="button" class="btn btn-danger ml-2" mat-raised-button color="warn" matTooltip="Clear record">Clear</button>
+                      </div> 
+                </form>    
+            </mat-tab>
+            <mat-tab label="Sent Notifications">
+                <div class="row p-4">
+                    <div class="row m-3">
+                      <mat-form-field>
+                        <mat-label>Select Filter</mat-label>
+                        <mat-select [(ngModel)]="SFCatFilter" name="challenge">
+                          <mat-option *ngFor="let obj of SFCatFilterList" [value]="obj.value">
+                            {{obj.key}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+        
+                    <div class="row m-3" style="height:10px">
+                      <button mat-raised-button color="primary" matTooltip="Show Notification" (click)="getNotificationList()">Show
+                        Notification</button>
+                    </div>
+                  </div>
+                  <table id="example1" class="table table-bordered table-striped" *ngIf="notificationList.length > 0 ">
+                    <thead>
+                      <tr>
+                        <th>Sr.No.</th>
+                        <th>Send Date</th>
+                        <th>Title</th>
+                        <th>Body</th>
+                        <th>Success Count</th>
+                        <th>Failure Count</th>
+                        <th>Icon</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of notificationList; let index = index">
+                        <td>{{index + 1}}</td>
+                        <td>{{data.createdDate}}</td>
+                        <td>{{data.title}}</td>
+                        <td>{{data.body}}</td>
+                        <td>{{data.successCount}}</td>
+                        <td>{{data.failureCount}}</td>
+                        <td>{{data.media}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </mat-tab>
+        </mat-tab-group>
+        </div>
+        </div>
+        </div>        

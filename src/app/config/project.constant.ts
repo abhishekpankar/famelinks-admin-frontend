@@ -18,7 +18,11 @@ export class ApiCollection {
     //users routes
     public static GET_USRS = 'users/getUsers';
     
-    public static VERIFY_USRS ='users/updateUserProfileVerification'
+    public static VERIFY_USRS ='users/updateUserProfileVerification';
+
+    //notification routes
+    public static SEND_NOTIFICATION = 'notification/sendNotification';
+
 }
 
 export class BucketConstants {

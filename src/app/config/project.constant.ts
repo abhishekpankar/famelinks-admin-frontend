@@ -22,6 +22,7 @@ export class ApiCollection {
 
     //notification routes
     public static SEND_NOTIFICATION = 'notification/sendNotification';
+    public static GET_NOTIFICATION = 'notification/getNotification';
 
 }
 

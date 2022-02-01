@@ -10,10 +10,11 @@ import { SweetAlertsService } from 'src/app/services/sweetMsg/sweet-alerts.servi
 })
 export class NotificationComponent implements OnInit {
   selectedIndex: number = 0;
-  sendToUsers: any[] = [{ key: "All", "value": "ALL" }, { key: "Verified users", "value": "VERIFIED_USER" }, { key: "Unverified Users", "value": "UNVERIFIED_USER" }, { key: "Blocked Users", "value": "BLOCKED_USER" }]
+  sendToUsers: any[] = [{ key: "All", "value": "all" }, { key: "Verified users", "value": "verifiedUser" }, { key: "Unverified Users", "value": "unverifiedUser" }, { key: "Blocked Users", "value": "blockedUser" }]
   notificationForm: any = FormGroup;
-  SFCatFilter: string = "ALL";
-  SFCatFilterList: any[] = [{ "key": "ALL", "value": "ALL" }];
+  SFCatFilter: string = "all";
+  SFCatFilterList: any[] = [{ "key": "ALL", "value": "all" }];
+  NotificationTypeList: any[] = [{ "key": "Pop-up", "value": "popup" },{ "key": "In-App", "value": "inapp" }];
   notificationList: any[] = [];
   constructor(private notificationService: NotificationService, private sweetMsg: SweetAlertsService) { }
 
@@ -22,7 +23,8 @@ export class NotificationComponent implements OnInit {
       userType: new FormControl('', [Validators.required]),
       body: new FormControl('', [Validators.required]),
       title: new FormControl('', [Validators.required]),
-      media: new FormControl()
+      media: new FormControl(),
+      notificationType:new FormControl('')
     })
   }
   onTabClick(event: any) {
@@ -59,60 +61,25 @@ export class NotificationComponent implements OnInit {
   }
 
   getNotificationList() {
-    this.notificationList = [{
-      "createdDate": "23/01/2022",
-      "title": "Famelink",
-      "body": "Kayak allows users to set up push notifications for flight prices – alerting them as soon as there’s a dip in cost. I actually like this one, because the user is the one that’s setting up the notification. And because everybody loves a good deal, a lot of push notifications are being created!",
-      "media": "NA",
-      "usrtType": "ALL",
-      "successCount": 10,
-      "failureCount": 50
-    },
-    {
-      "createdDate": "23/01/2022",
-      "title": "Famelink",
-      "body": "Kayak allows users to set up push notifications for flight prices – alerting them as soon as there’s a dip in cost. I actually like this one, because the user is the one that’s setting up the notification. And because everybody loves a good deal, a lot of push notifications are being created!",
-      "media": "NA",
-      "usrtType": "VERIFIED_USER",
-      "successCount": 50,
-      "failureCount": 10
-    },
-    {
-      "createdDate": "23/01/2022",
-      "title": "Famelink",
-      "body": "Kayak allows users to set up push notifications for flight prices – alerting them as soon as there’s a dip in cost. I actually like this one, because the user is the one that’s setting up the notification. And because everybody loves a good deal, a lot of push notifications are being created!",
-      "media": "NA",
-      "usrtType": "ALL",
-      "successCount": 50,
-      "failureCount": 20
-    },
-    {
-      "createdDate": "23/01/2022",
-      "title": "Famelink",
-      "body": "Kayak allows users to set up push notifications for flight prices – alerting them as soon as there’s a dip in cost. I actually like this one, because the user is the one that’s setting up the notification. And because everybody loves a good deal, a lot of push notifications are being created!",
-      "media": "NA",
-      "usrtType": "VERIFIED_USER",
-      "successCount": 100,
-      "failureCount": 20
-    },
-    {
-      "createdDate": "23/01/2022",
-      "title": "Famelink",
-      "body": "Kayak allows users to set up push notifications for flight prices – alerting them as soon as there’s a dip in cost. I actually like this one, because the user is the one that’s setting up the notification. And because everybody loves a good deal, a lot of push notifications are being created!",
-      "media": "NA",
-      "usrtType": "UNVERIFIED_USER",
-      "successCount": 20,
-      "failureCount": 10
-    },
-    {
-      "createdDate": "23/01/2022",
-      "title": "Famelink",
-      "body": "Kayak allows users to set up push notifications for flight prices – alerting them as soon as there’s a dip in cost. I actually like this one, because the user is the one that’s setting up the notification. And because everybody loves a good deal, a lot of push notifications are being created!",
-      "media": "NA",
-      "usrtType": "VERIFIED_USER",
-      "successCount": 100,
-      "failureCount": 20
-    }
-    ]
+    
+    this.notificationService.getNotification({filterType:this.SFCatFilter}).subscribe((response: any) => {
+      if (response.success) {
+        this.notificationList = response.result.map((e:any)=>{
+          return {
+            "createdDate": new Date(e.createdAt).toLocaleDateString(),
+            "title": e.title,
+            "body": e.body,
+            "media": "NA",
+            "usrtType": e.type,
+            "successCount": e.successCount,
+            "failureCount": e.failureCount
+          }
+        })
+        this.sweetMsg.showSuccess(response.message);
+      } else {
+        this.sweetMsg.showError(response.message);
+      }
+    })
+ 
   }
 }

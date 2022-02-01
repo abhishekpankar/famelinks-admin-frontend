@@ -12,4 +12,8 @@ export class NotificationService {
   sendNotification(data: any){
     return this.appConfigServices.postService(ApiCollection.SEND_NOTIFICATION, data);
   }
+
+  getNotification(data:any){
+    return this.appConfigServices.postService(ApiCollection.GET_NOTIFICATION,data)
+  }
 }

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // BASE_URL:"http://localhost:3000/v1/"
-  BASE_URL:"https://adminapi.dev.famelinks.in/v1/"
+  BASE_URL:"http://localhost:3000/v1/"
+  // BASE_URL:"https://adminapi.dev.famelinks.in/v1/"
 };
 
 /*

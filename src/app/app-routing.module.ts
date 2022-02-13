@@ -38,6 +38,12 @@ const routes: Routes = [
         data: { title: 'notifications' },
         // 'canActivate': [AuthGuard]
       },
+      {
+        path: 'upload-audio',
+        loadChildren: () => import('./view/upload-audio/upload-audio.module').then(mod => mod.UploadAudioModule),
+        data: { title: 'upload-audio' },
+        // 'canActivate': [AuthGuard]
+      },
       ]
     },
 

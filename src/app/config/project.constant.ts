@@ -24,6 +24,12 @@ export class ApiCollection {
     public static SEND_NOTIFICATION = 'notification/sendNotification';
     public static GET_NOTIFICATION = 'notification/getNotification';
 
+    //Upload Route
+    public static UPLOAD_MUSIC = 'musicMedia/uploadMusicMedia';
+   //Music route
+    public static GET_MUSIC_LIST = 'musicMedia/getMusicMediaList';
+
+
 }
 
 export class BucketConstants {

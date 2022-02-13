@@ -1,0 +1,122 @@
+<div class="row p-2">
+    <div class="col-md-12">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Upload Audio</h3>
+        </div>
+        <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabClick($event)">
+          <mat-tab label="Create Audio">
+            <form id="quickForm">
+              <div class="row p-4">
+                <div class="col-sm-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Title</mat-label>
+                    <input matInput placeholder="Enter Title" [(ngModel)]="uploadObj.title" name="title">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-8">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Description</mat-label>
+                    <input matInput placeholder="Enter description" [(ngModel)]="uploadObj.description" name="description">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Artist</mat-label>
+                    <input matInput placeholder="Enter artist name" [(ngModel)]="uploadObj.by" name="artist">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="customFile">Audio File</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFile1" (change)="upload($event,'audio')"
+                        name="image" accept="audio/mp3">
+                      <label class="custom-file-label" for="customFile1">Choose Audio</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-2" *ngIf="uploadObj.music">
+                  <label>Preview</label>
+                  <div>
+                    <img class="new-img" [src]="uploadObj.music" alt="Cover image" data-toggle="modal"
+                      data-target="#upload-image" (click)="openTableImg(uploadObj.music)">
+                  </div>
+                </div>
+  
+              </div>
+              <div class="p-4">
+                <button type="submit" mat-raised-button color="primary" matTooltip="Submit record"
+                  (click)="submit(uploadObj)">{{uploadObj.id ? 'Update' : 'Submit'}}</button>
+                <button type="submit" class="ml-2" mat-raised-button color="warn" matTooltip="Clear record"
+                  (click)="clearNotify()">Clear</button>
+              </div>
+            </form>
+          </mat-tab>
+          <mat-tab label="Audio List">
+            <div class="m-4 text-center" *ngIf="!showNotifyList">
+              <div>Click to view records</div>
+              <div>
+                <button mat-raised-button color="primary" matTooltip="Transport List" (click)="getUploadedAudioList()">Show
+                  Load</button>
+              </div>
+            </div>
+            <table id="example1" class="table table-bordered table-striped" *ngIf="showNotifyList">
+              <thead>
+                <tr>
+                  <th>Sr.No.</th>
+                  <th>Title</th>
+                  <th>Artist</th>
+                  <th>Music</th>
+                  <th>Duration</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of uploadList; let index = index">
+                  <td>{{index + 1}}</td>
+                  <td>{{data.name}}</td>
+                  <td>{{data.by}}</td>
+                  <td><a [href]=data.music target="_blank">Play</a> </td>
+                  <td>{{data.duration}}</td>
+                  <td>
+                  <button mat-mini-fab color="warn" (click)="updateNotify(data)" aria-label="Delete" matTooltip="Delete">
+                    <mat-icon>delete_forever</mat-icon>
+                  </button>
+                  </td>
+                  <!-- <td>
+                    <button mat-raised-button color="primary" matTooltip="Play Music"
+                      >Play Music</button>
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="modal fade" id="upload-image">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Preview Image</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img [src]="previewImage" alt="Preview image" class="new-img">
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default float-right" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <!-- ==================================================================================== -->

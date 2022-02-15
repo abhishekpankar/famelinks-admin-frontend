@@ -27,7 +27,8 @@ export class ApiCollection {
     //Upload Route
     public static UPLOAD_MUSIC = 'musicMedia/uploadMusicMedia';
    //Music route
-    public static GET_MUSIC_LIST = 'musicMedia/getMusicMediaList';
+   public static GET_MUSIC_LIST = 'musicMedia/getMusicMediaList';
+   public static CREATE_MUSIC_DOCUMENT = 'musicMedia/createMusicMediaDocument';
 
 
 }

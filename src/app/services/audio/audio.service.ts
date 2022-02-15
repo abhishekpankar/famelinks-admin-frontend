@@ -19,7 +19,7 @@ export class AudioService {
   }
 
   createAudioDocument(requestJson:any){
-    
+    return this.appConfigServices.postService(ApiCollection.CREATE_MUSIC_DOCUMENT, requestJson);
   }
 
   uploadAudioFile(requestData:any){

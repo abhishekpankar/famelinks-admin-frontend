@@ -37,10 +37,8 @@
                   </div>
                 </div>
                 <div class="col-sm-2" *ngIf="uploadObj.music">
-                  <label>Preview</label>
                   <div>
-                    <img class="new-img" [src]="uploadObj.music" alt="Cover image" data-toggle="modal"
-                      data-target="#upload-image" (click)="openTableImg(uploadObj.music)">
+                    <a [href]=uploadObj.musicUrl target="_blank">Play</a>
                   </div>
                 </div>
   

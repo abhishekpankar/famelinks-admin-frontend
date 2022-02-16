@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AudioService } from 'src/app/services/audio/audio.service';
 import { SweetAlertsService } from 'src/app/services/sweetMsg/sweet-alerts.service';
 import { UploadService } from 'src/app/services/upload/upload.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-upload-audio',
@@ -15,7 +16,8 @@ export class UploadAudioComponent implements OnInit {
   selectedIndex: number = 0;
   showNotifyList: boolean = false;
   uploadList: any[] = [];
-  previewImage: string = ''
+  previewImage: string = '';
+  previewAudio:string = '';
   
   constructor(private audioService: AudioService, private sweetMsg: SweetAlertsService, private uploadService: UploadService) { }
 
@@ -33,7 +35,7 @@ export class UploadAudioComponent implements OnInit {
         this.uploadList =response.result.map((doc:any)=>{
           return{
             id:doc._id,
-            music:doc.music ? "https://famelinks.s3.ap-south-1.amazonaws.com/funlinks-songs/"+doc.music:null,
+            music:doc.music ? environment.MUSIC_BASE_URL+doc.music:null,
             by:doc.by,
             name:doc.name,
             duration:doc.duration ? this.secondsToHms(doc.duration):'NA',
@@ -74,7 +76,7 @@ export class UploadAudioComponent implements OnInit {
           console.log("music upload response data : ",response);
           if(response.success){
             this.uploadObj.music = response.result.audio;
-            this.uploadObj.musicUrl = "https://famelinks-dev.s3.ap-south-1.amazonaws.com/funlinks-songs/"+response.result.audio;
+            this.uploadObj.musicUrl = environment.MUSIC_BASE_URL+response.result.audio;
             this.sweetMsg.showSuccess(response.message);
           }else{
             this.uploadObj.music = null;
@@ -97,8 +99,16 @@ export class UploadAudioComponent implements OnInit {
       }
   }
 
-  openTableImg(img: string){
-    this.previewImage = img;
+  openTable(type:string,url: string){
+    console.log("type : ",type ," url : ",url);
+
+    if(type === "image"){
+    this.previewImage = url;
+    }else if(type === "audio"){ 
+      this.previewAudio = url
+      console.log("this.previewAudio ",this.previewAudio);
+      
+    }
   }
 
   async updateNotify(data: any){

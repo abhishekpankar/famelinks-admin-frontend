@@ -37,9 +37,14 @@
                   </div>
                 </div>
                 <div class="col-sm-2" *ngIf="uploadObj.music">
-                  <div>
+                  <!-- <div>
                     <a [href]=uploadObj.musicUrl target="_blank">Play</a>
-                  </div>
+                  </div> -->
+                  <label>Preview</label>
+                <div>
+                  <a class="new-img" alt="preview audio" data-toggle="modal"
+                    data-target="#upload-music" (click)="openTable('audio',uploadObj.musicUrl)">Play</a>
+                </div>
                 </div>
   
               </div>
@@ -75,7 +80,8 @@
                   <td>{{index + 1}}</td>
                   <td>{{data.name}}</td>
                   <td>{{data.by}}</td>
-                  <td><a [href]=data.music target="_blank">Play</a> </td>
+                  <td> <a class="new-img" alt="preview audio" data-toggle="modal"
+                    data-target="#upload-music" (click)="openTable('audio',data.music)">Play</a></td>
                   <td>{{data.duration}}</td>
                   <td>
                   <button mat-mini-fab color="warn" (click)="updateNotify(data)" aria-label="Delete" matTooltip="Delete">
@@ -115,6 +121,25 @@
     </div>
   </div>
   
-  
+  <div class="modal fade" id="upload-music">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Preview Audio</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <audio controls autoplay>
+            <source [src] = "previewAudio" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default float-right" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <!-- ==================================================================================== -->

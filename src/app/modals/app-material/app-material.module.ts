@@ -14,7 +14,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
-
+import {MatRadioModule} from '@angular/material/radio';
 const materialModules = [
   MatButtonModule,
   MatCardModule,
@@ -33,7 +33,8 @@ const materialModules = [
   MatButtonModule,
   MatTooltipModule,
   MatTabsModule,
-  MatChipsModule  
+  MatChipsModule,
+  MatRadioModule
 ]
 
 @NgModule({

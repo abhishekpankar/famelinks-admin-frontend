@@ -17,8 +17,10 @@ export class ApiCollection {
 
     //users routes
     public static GET_USRS = 'users/getUsers';
-    
     public static VERIFY_USRS ='users/updateUserProfileVerification';
+    public static BLOCK_USER = 'users/blockedUser';
+    public static SEND_MAIL = 'users/sendMail';
+
 
     //notification routes
     public static SEND_NOTIFICATION = 'notification/sendNotification';
@@ -26,10 +28,16 @@ export class ApiCollection {
 
     //Upload Route
     public static UPLOAD_MUSIC = 'musicMedia/uploadMusicMedia';
-   //Music route
-   public static GET_MUSIC_LIST = 'musicMedia/getMusicMediaList';
-   public static CREATE_MUSIC_DOCUMENT = 'musicMedia/createMusicMediaDocument';
+  
+    //Music route
+    public static GET_MUSIC_LIST = 'musicMedia/getMusicMediaList';
+    public static CREATE_MUSIC_DOCUMENT = 'musicMedia/createMusicMediaDocument';
 
+    //Report Route
+    public static GET_REPORT_LIST = 'report';
+
+     //Improvement suggestiond Route
+     public static GET_IMPROVEMENT_SUGGESTIONS_LIST = 'users/feadback/';
 
 }
 

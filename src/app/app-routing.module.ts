@@ -44,6 +44,18 @@ const routes: Routes = [
         data: { title: 'upload-audio' },
         // 'canActivate': [AuthGuard]
       },
+      {
+        path: 'support-query',
+        loadChildren: () => import('./view/support-query/support-query.module').then(mod => mod.SupportQueryModule),
+        data: { title: 'support-query' },
+        // 'canActivate': [AuthGuard]
+      },
+      {
+        path: 'improvement-suggestions',
+        loadChildren: () => import('./view/improvement-suggestions/improvement-suggestions.module').then(mod => mod.ImprovementSuggestionsModule),
+        data: { title: 'improvement-suggestions' },
+        // 'canActivate': [AuthGuard]
+      },
       ]
     },
 

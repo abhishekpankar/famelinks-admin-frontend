@@ -1,0 +1,84 @@
+/* ::ng-deep .mat-form-field{
+    width: 100%;
+    border: 1px solid #d4d9df;
+    border-radius: 5px;
+    padding: 3px 8px 4px 12px;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0px;
+    background-color: transparent;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0px;
+}
+::ng-deep .mat-form-field-infix {
+    border-top: 0 solid transparent;
+}
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+    background: #007bff;
+}
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #007bff;
+}
+::ng-deep .mat-label{
+    font-size: 1rem;
+    font-weight: 400;
+    color: #a3a7aa;
+} */
+.new-img{
+    width: 50px;
+    height: 50px;
+    max-width: 100%;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.table-img{
+    width: 15%;
+}
+.preview-img{
+    /* width: 40px;
+    height: 42px;
+    margin: 25px 0 0 0;
+    border-radius: 50%;
+    border: 1px solid;
+    cursor: pointer; */
+    max-width: 100%;
+    /* border: 1px solid; */
+}
+.example-full-width{
+    width: 100%;
+}
+::ng-deep .mat-tab-body-content {
+    height: 100%;
+    overflow: hidden !important;
+}
+.fw-5{
+    font-weight: 500 !important;
+}
+.remove-img{
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    margin: 2px -20px;
+    cursor: pointer;
+    height: 18px !important;
+    width: 18px !important;
+    text-align: center !important;
+    padding: 0 !important;
+}
+.col-box {
+  width: 10px;
+  height: 10px;
+  padding: 4px 14px;
+}
+
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}
+
+.table td, .table th {
+    padding: 20px;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}

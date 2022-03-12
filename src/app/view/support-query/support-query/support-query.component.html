@@ -1,0 +1,117 @@
+<div class="row p-2">
+  <!-- <div class="col-12">
+              <h4>Category</h4>
+            </div> -->
+</div>
+<div class="row">
+  <!-- left column -->
+  <div class="col-md-12">
+    <!-- jquery validation -->
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Support</h3>
+      </div>
+    </div>
+    <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabClick($event)">
+        <mat-tab label="Support Query">
+          <div class="row p-4">
+            <div class="row m-3">
+              <mat-form-field>
+                <mat-label>Select Filter</mat-label>
+                <mat-select [(ngModel)]="SFSupportQueryFilter" name="SupportQueryFilter">
+                  <mat-option *ngFor="let obj of SFSupportQueryFilterList" [value]="obj.value">
+                    {{obj.key}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="row m-3" style="height:10px">
+              <button mat-raised-button color="primary" matTooltip="Load"
+                (click)="getList()">Load</button>
+            </div>
+          </div>
+          <table id="example1" class="table table-bordered table-striped" *ngIf="reportedIssueList.length > 0 ">
+            <thead>
+              <tr>
+                <th>Sr.No.</th>
+                <th>User Name</th>
+                <th>Issue Description</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+                <th>Type</th>      
+                <th>Reported Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of reportedIssueList; let index = index">
+                <td>{{index + 1}}</td>
+                <td>{{data.usesrName}}</td>
+                <td>{{data.issueBody}}</td>
+                <td>{{data.email}}</td>
+                <td>{{data.mobileNumber}}</td>
+                <td>{{data.type}}</td>
+                <td>{{data.createdDate}}</td>
+                <td>
+                  <button mat-raised-button color="primary" matTooltip="Send email to user"
+                  (click)="openSendMailModel(data)">Send Email</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-tab>    
+    </mat-tab-group>
+
+    <!-- /.card -->
+  </div>
+  <!--/.col (left) -->
+  <!-- right column -->
+  <div class="col-md-6"></div>
+</div>
+<button id="sendMailPopBtn" style="display: none;" class="btn btn-social-icon btn-xs btn-success" type="button"
+data-toggle="modal" data-target="#send-mail">
+</button>
+
+<div class="modal fade" id="send-mail">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Send Mail</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row p-4">
+          <div class="col-sm-12">
+            <mat-form-field class="example-full-width">
+              <mat-label>User Name</mat-label>
+              <input matInput [(ngModel)]="mailObj.usesrName" name="name" readonly>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row p-4">
+          <div class="col-sm-12">
+            <mat-form-field class="example-full-width">
+              <mat-label>E-mail</mat-label>
+              <input matInput [(ngModel)]="mailObj.email" name="email" readonly>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row p-4">
+          <div class="col-sm-12">
+            <mat-form-field class="example-full-width">
+              <mat-label>Mail Body</mat-label>
+              <textarea matInput rows="10" [(ngModel)]="mailObj.emailBody" placeholder="Email Body" name="name"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button"  class="btn btn-default float-right" data-dismiss="modal">Close</button>
+        <button type="button" (click)="submitMailForm(mailObj)" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

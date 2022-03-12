@@ -1,0 +1,64 @@
+<div class="row p-2">
+    <!-- <div class="col-12">
+                <h4>Category</h4>
+              </div> -->
+  </div>
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- jquery validation -->
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Support</h3>
+        </div>
+      </div>
+      <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabClick($event)">
+          <mat-tab label="Support Query">
+            <div class="row p-4">
+              <div class="row m-3">
+                <mat-form-field>
+                  <mat-label>Select Filter</mat-label>
+                  <mat-select [(ngModel)]="SFSuggestionsFilter" name="SuggestionsFilter">
+                    <mat-option *ngFor="let obj of SFSuggestionsFilterList" [value]="obj.value">
+                      {{obj.key}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+  
+              <div class="row m-3" style="height:10px">
+                <button mat-raised-button color="primary" matTooltip="Load"
+                  (click)="getList()">Load</button>
+              </div>
+            </div>
+            <table id="example1" class="table table-bordered table-striped" *ngIf="improvementSuggestionList.length > 0 ">
+              <thead>
+                <tr>
+                  <th>Sr.No.</th>
+                  <th>User Name</th>
+                  <th>Improvement Suggestion</th>
+                  <th>Email</th>
+                  <th>Mobile Number</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of improvementSuggestionList; let index = index">
+                  <td>{{index + 1}}</td>
+                  <td>{{data.usesrName}}</td>
+                  <td>{{data.body}}</td>
+                  <td>{{data.email}}</td>
+                  <td>{{data.mobileNumber}}</td>
+                  <td>{{data.createdDate}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </mat-tab>    
+      </mat-tab-group>
+  
+      <!-- /.card -->
+    </div>
+    <!--/.col (left) -->
+    <!-- right column -->
+    <div class="col-md-6"></div>
+  </div>

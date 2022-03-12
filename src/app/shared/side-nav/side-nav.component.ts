@@ -55,6 +55,9 @@ export class SideNavComponent implements OnInit {
       {moduleName: 'Reported Data', childMenu: [], url:'/reported-data'},
       {moduleName: 'Notification', childMenu: [], url:'/notifications'},
       {moduleName: 'Upload Audio', childMenu: [], url:'/upload-audio'},
+      {moduleName: 'Support Query', childMenu: [], url:'/support-query'},
+      {moduleName: 'Suggestions', childMenu: [], url:'/improvement-suggestions'},
+      
     ]
     this.navMenu = menu;
   }

@@ -12,4 +12,7 @@ export class Challenges {
     for?: string[]
     mediaPreference?: string[]
     isDeleted?: boolean
+    requiredImpressions ?: Number
+    requiredParticipants ?: Number
+    requiredPost ?: Number
 }

@@ -27,12 +27,13 @@
                   <thead>
                     <tr>
                       <th>Sr.No.</th>
+                      <th></th>
                       <th>Name</th>
                       <th>User Name</th>
                       <th>Mobile Number</th>
                       <th>Gender</th>
                       <th>Blocked</th>
-                      <th>Verified</th>
+                      <th>Verification Status</th>
                       <!-- <th>Referred By</th> -->
                       <th>Verification Video</th>
                       <th>Action</th>
@@ -41,20 +42,26 @@
                   <tbody>
                     <tr *ngFor="let data of userList; let index = index">
                       <td>{{index + 1}}</td>
+                      <td> <img [src]="data.profileImage" alt="FameLinks Logo"  class="brand-image elevation-3" style="opacity: .8 ; width: 80px;"> </td>
                       <td>{{data.name ? data.name : "NA"}}</td>
                       <td>{{data.username ? data.username : "NA"}}</td>
                       <td>{{data.mobileNumber ? data.mobileNumber :"NA"}}</td>
                       <td>{{data.gender ? data.gender : "NA"}}</td>
                       <td>{{data.isBlocked ?  "Yes" : "No"}}</td>
-                      <td>{{data.isVerified ? "Yes" : "No"}}</td>
+                      <td>{{data.verificationStatus}}</td>
                       <!-- <td>{{data.referredBy}}</td> -->
-                      <td><video width="80" height="80" controls>
+                      <td *ngIf = "data.verificationVideoUrl; else loggedOut" ><video width="125" controls>
                         <source [src]="data.verificationVideoUrl" type="video/mp4">
                       </video></td>
-                     
+                      <ng-template #loggedOut>
+                        <td>NA</td>
+                      </ng-template>                      
                       <td>
-                        <mat-icon  aria-hidden="false" aria-label="View User" class="pointer"  matTooltip="View User Details.." (click)="userAction('View',data)">account_circle</mat-icon>
-                        <mat-icon  aria-hidden="false" aria-label="Verify User" class="pointer" matTooltip="verify user.." (click)="userAction('Verify',data)">how_to_reg</mat-icon>
+                        <button class="action-btn" mat-flat-button color="primary" (click)="userAction('View',data)">View Details</button>
+                        <button *ngIf="data.verificationStatus === 'Submitted'" class="action-btn" mat-flat-button style="background-color: rgb(16, 179, 30);" (click)="userAction('Approve',data)">Approve</button>
+                        <button *ngIf="data.verificationStatus === 'Submitted' || data.verificationStatus === 'Verified'" class="action-btn" mat-flat-button color="warn" (click)="userAction('Reject',data)">Reject</button>        
+                        <!-- <mat-icon  aria-hidden="false" aria-label="View User" class="pointer"  matTooltip="View User Details.." (click)="userAction('View',data)">account_circle</mat-icon>
+                        <mat-icon  aria-hidden="false" aria-label="Verify User" class="pointer" matTooltip="verify user.." (click)="userAction('Verify',data)">how_to_reg</mat-icon> -->
                       </td>
 
                     </tr>

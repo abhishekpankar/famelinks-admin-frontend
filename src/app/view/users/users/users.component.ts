@@ -11,8 +11,8 @@ import { UsersService } from 'src/app/services/users/users.service';
 })
 export class UsersComponent implements OnInit {
 
-  SFCatFilter: string = "ALL";
-  SFCatFilterList: any[] = [{ "key": "ALL", "value": "ALL" },{ "key": "VERIFIED", "value": "VERIFIED" },{ "key": "UNVERIFIED", "value": "UNVERIFIED" }]
+  SFCatFilter: string = "SUBMITTED";
+  SFCatFilterList: any[] = [{ "key": "ALL", "value": "ALL" },{ "key": "VERIFIED", "value": "VERIFIED" },{ "key": "PENDING", "value": "PENDING" },{ "key": "SUBMITTED", "value": "SUBMITTED" },{ "key": "REJECTED", "value": "REJECTED" }]
   selectedIndex: number = 0;
   userList:any[] =[];
 
@@ -33,7 +33,8 @@ export class UsersComponent implements OnInit {
       referredBy: new FormControl(''),
       referralCode: new FormControl(''),
       createdDate:new FormControl(),
-    })
+    });
+    this.getUsersList();
   }
 
   onTabClick(event: any) {
@@ -61,15 +62,15 @@ export class UsersComponent implements OnInit {
             dob:user.dob,
             isRegistered:user.isRegistered,
             isBlocked:user.isBlocked,
-            profileImage:user.profileImage,
             isVerified:user.isVerified,
             createdAt:user.createdAt,
             username:user.username,
             referredBy:user.referredBy,
-            verificationVideoUrl:user.verificationVideo? BucketConstants.PROFILE_VERIFICATION_URL+user.verificationVideo : ""
+            verificationVideoUrl:user.verificationVideo? BucketConstants.PROFILE_VERIFICATION_URL+user.verificationVideo : "",
+            profileImage:user.profileImage? BucketConstants.PROFILE_VERIFICATION_URL+user.profileImage : null,
+            verificationStatus : user.verificationStatus
           }
         })
-        console.log("userList : ",this.userList);
         this.sweetMsg.showSuccess(response.message);
         
       }else{
@@ -99,22 +100,34 @@ export class UsersComponent implements OnInit {
         createdDate:new Date(data.createdAt)
       })
       this.selectedIndex = 1;
-    }else if(action === "Verify"){
+    }else if(action === "Approve"){
      await this.sweetMsg.confirmMsg("Are you sure you want to verify this user account..?").then(result=>{
       if(result === 1){
        let requestData = {"userId":data['id'],"isVerified":true}
         this.crudeService.verifyUser(requestData).subscribe((response: any) => {
           if (response.success) {
             this.sweetMsg.showSuccess(response.message);
-            this.SFCatFilter = "VERIFIED";
-            this.userList = [];
-            this.getUsersList();
+            data['verificationStatus']= 'Verified';
           } else {
             this.sweetMsg.showError(response.message);
           }
         })
       }
      })
-    }
+    }else if(action === "Reject"){
+      await this.sweetMsg.confirmMsg("Are you sure you want to reject this user account..?").then(result=>{
+       if(result === 1){
+        let requestData = {"userId":data['id'],"isVerified":false}
+         this.crudeService.verifyUser(requestData).subscribe((response: any) => {
+           if (response.success) {
+             this.sweetMsg.showSuccess(response.message);
+             data['verificationStatus']= 'Rejected';
+           } else {
+             this.sweetMsg.showError(response.message);
+           }
+         })
+       }
+      })
+     }
   }
 }

@@ -8,7 +8,7 @@
         <mat-tab label="Create Challenge">
           <form [formGroup]="challengesForm" (ngSubmit)="SubmitChallenge(challengesForm)" id="challengesFormID">
             <div class="row p-4">
-              <div class="col-sm-4">
+              <div class="col-sm-8">
                 <mat-form-field class="example-full-width">
                   <mat-label>Challenge Title</mat-label>
                   <input matInput placeholder="Enter Title" name="name" formControlName="name">
@@ -23,12 +23,27 @@
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
               </div>
+            </div>
+            <div class="row p-4">
               <div class="col-sm-4">
                 <mat-form-field class="example-full-width">
-                  <mat-label>End Date</mat-label>
-                  <input matInput [matDatepicker]="picker1" formControlName="endDate" name="endDate" [min]="minDate">
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                  <mat-datepicker #picker1></mat-datepicker>
+                  <mat-label>Impressions Count</mat-label>
+                  <input matInput placeholder="Enter Number Of Impressions" name="requiredImpressions" formControlName="requiredImpressions">
+                  <bfv-messages class="error-msg"></bfv-messages>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Participants Count</mat-label>
+                  <input matInput placeholder="Enter Number Of Participants" name="requiredParticipants" formControlName="requiredParticipants">
+                  <bfv-messages class="error-msg"></bfv-messages>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Post Count</mat-label>
+                  <input matInput placeholder="Enter Post Count" name="requiredPost" formControlName="requiredPost">
+                  <bfv-messages class="error-msg"></bfv-messages>
                 </mat-form-field>
               </div>
             </div>
@@ -67,7 +82,23 @@
               </div>
             </div>
             <div class="row p-4">
-              <div class="col-sm-12">
+              <div class="col-sm-6">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Sponsors</mat-label>
+                  <textarea matInput placeholder="Enter Sponser List" name="sponsor"
+                    formControlName="sponsor" rows="3"></textarea>
+                  <bfv-messages class="error-msg"></bfv-messages>
+                </mat-form-field>
+               </div> 
+               <div class="col-sm-6">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Reward</mat-label>
+                  <textarea matInput placeholder="Enter Reward" name="reward"
+                    formControlName="reward" rows="3"></textarea>
+                  <bfv-messages class="error-msg"></bfv-messages>
+                </mat-form-field>
+               </div> 
+              <!-- <div class="col-sm-12">
                 <mat-form-field class="example-chip-list">
                   <mat-label>Sponsors</mat-label>
                   <mat-chip-list #chipList1 aria-label="Sponsor selection" formControlName="sponsor">
@@ -81,7 +112,7 @@
                       (matChipInputTokenEnd)="addTag($event,'Sponsors')">
                   </mat-chip-list>
                 </mat-form-field>
-              </div>
+              </div> -->
             </div>
             <div class="p-4">
               <button type="submit" mat-raised-button color="primary" matTooltip="Submit record">Submit</button>
@@ -117,7 +148,6 @@
                 <th>Sponser</th>
                 <th>Reward</th>
                 <th>From Date</th>
-                <th>To Date</th>
                 <th>Active</th>
                 <th>Action</th>
               </tr>
@@ -129,7 +159,6 @@
                 <td>{{data.sponsor}}</td>
                 <td>{{data.reward}}</td>
                 <td>{{data.startDate}}</td>
-                <td>{{data.endDate}}</td>
                 <td>
                   <mat-slide-toggle [(ngModel)]="!data.isDeleted" name="isDeleted" (change)="activate($event,data.id)">
                   </mat-slide-toggle>

@@ -23,3 +23,30 @@
 .material-icons.color_green { color: #00FF00; }
 .material-icons.color_red { color: #f15e5e; }
 .pointer {cursor: pointer;}
+.action-btn{
+    box-sizing: border-box;
+    position: relative;
+    user-select: none;
+    outline: none;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    min-width: 40px;
+    line-height: 25px;
+    padding: 0 10px;
+    border-radius: 8px;
+    overflow: visible;
+    font-size: 11px;
+    font-weight: 500;
+}
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }

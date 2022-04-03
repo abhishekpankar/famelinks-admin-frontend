@@ -42,5 +42,5 @@ export class ApiCollection {
 }
 
 export class BucketConstants {
-    public static PROFILE_VERIFICATION_URL = 'https://famelinks-dev.s3.ap-south-1.amazonaws.com/profile-images/';
+    public static PROFILE_VERIFICATION_URL = 'https://famelinks.s3.ap-south-1.amazonaws.com/profile-images/';
 };

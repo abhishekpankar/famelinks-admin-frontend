@@ -28,7 +28,7 @@ export class ChallengesComponent implements OnInit {
   challengesForm: any = FormGroup
   selectedIndex: number = 0;
   minDate: Date;
-  genderList: string[] = ['male', 'female', 'other'];
+  genderList: string[] = ['male', 'female', 'kids'];
   mediaPreferenceList: string[] = ['photo', 'video']
   challengeList: any = []
   SFCatFilter: string = "ALL";
@@ -43,11 +43,13 @@ export class ChallengesComponent implements OnInit {
     this.challengesForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
-      sponsor: new FormControl([]),
+      sponsor: new FormControl('',[Validators.required]),
       description: new FormControl(''),
       reward: new FormControl(''),
       startDate: new FormControl('', [Validators.required]),
-      endDate: new FormControl('', [Validators.required]),
+      requiredImpressions : new FormControl(0),
+      requiredParticipants : new FormControl(0),
+      requiredPost:new FormControl(0),
       type: new FormControl(''),
       image: new FormControl(''),
       hashTag: new FormControl([]),
@@ -69,17 +71,19 @@ export class ChallengesComponent implements OnInit {
       let requestData: Challenges = {
         id: submitForm.value.id,
         name: submitForm.value.name,
-        sponsor: this.sponsorsTag.length > 0 ? this.sponsorsTag.map(doc => doc.name) : "",
+        sponsor: submitForm.value.sponsor,//this.sponsorsTag.length > 0 ? this.sponsorsTag.map(doc => doc.name) : "",
         description: submitForm.value.description,
         reward: submitForm.value.reward,
         startDate: submitForm.value.startDate,
-        endDate: submitForm.value.endDate,
         type: submitForm.value.type,
         image: submitForm.value.image,
         hashTag: this.searchTag.length > 0 ? this.searchTag.map(doc => doc.name) : [],
         for: submitForm.value.for,
         mediaPreference: submitForm.value.mediaPreference,
         isDeleted: submitForm.value.isDeleted,
+        requiredImpressions : submitForm.value.requiredImpressions ? submitForm.value.requiredImpressions : 0,
+        requiredParticipants : submitForm.value.requiredParticipants ? submitForm.value.requiredParticipants : 0,
+        requiredPost:submitForm.value.requiredPost ? submitForm.value.requiredPost : 0
       }
 
       if (!requestData.id) {
@@ -134,18 +138,19 @@ export class ChallengesComponent implements OnInit {
     this.challengesForm.patchValue({
       id: data.id,
       name: data.name,
-      // sponsor: data.sponsor,
-      sponsor: "",
+      sponsor: data.sponsor,
       description: data.description,
       reward: data.reward,
       startDate: new Date(data.startDate),
-      endDate: new Date(data.endDate),
       type: data.type,
       image: data.image,
       hashTag: data.hashTag,
       for: data.for,
       mediaPreference: data.mediaPreference,
       isDeleted: data.isDeleted,
+      requiredImpressions : data.requiredImpressions ? data.requiredImpressions : 0,
+      requiredParticipants : data.requiredParticipants ? data.requiredParticipants: 0,
+      requiredPost : data.requiredPost ? data.requiredPost : 0,
     })
     this.selectedIndex = await 0;
   }
@@ -166,8 +171,10 @@ export class ChallengesComponent implements OnInit {
             sponsor: doc.sponsor,
             description: doc.description,
             reward: doc.reward,
-            startDate: new Date(doc.startDate).toISOString().slice(0, 10),
-            endDate: new Date(doc.endDate).toISOString().slice(0, 10),
+            startDate: doc.startDate ? new Date(doc.startDate).toISOString().slice(0, 10) : "NA",
+            requiredImpressions : doc.requiredImpressions,
+            requiredParticipants : doc.requiredParticipants,
+            requiredPost : doc.requiredPost,
             type: doc.type,
             image: doc.image,
             hashTag: doc.hashTag,

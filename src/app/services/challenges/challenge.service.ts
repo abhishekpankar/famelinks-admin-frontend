@@ -22,7 +22,8 @@ export class ChallengeService {
   }
 
   deleteChallenge(id:string){
-    return this.appConfigServices.deleteService(ApiCollection.DELETE_CATERGORY, {"challengeId":id});
+    let reqData = {"challengeId":id};
+    return this.appConfigServices.postService(ApiCollection.DELETE_CATERGORY, reqData);
 
   }
 }

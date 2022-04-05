@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
     console.log("Result",result)
     if(result == 1){
       this.route.navigate(['/login']);
+      localStorage.removeItem('token');
       this.sweetService.showInfo('Logout sucessfully!');
     }
   }

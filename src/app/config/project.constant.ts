@@ -20,6 +20,7 @@ export class ApiCollection {
     public static VERIFY_USRS ='users/updateUserProfileVerification';
     public static BLOCK_USER = 'users/blockedUser';
     public static SEND_MAIL = 'users/sendMail';
+    public static ADMIN_LOGIN = 'users/login';
 
 
     //notification routes

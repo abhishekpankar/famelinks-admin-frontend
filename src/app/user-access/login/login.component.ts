@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
     this.loginFormGroup = new FormGroup({
       userId: new FormControl('', [
         Validators.required,
+        Validators.email,
         Validators.pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
       ]),
       userPassword: new FormControl('', [
@@ -55,26 +56,31 @@ export class LoginComponent implements OnInit {
 
   //Login User
   async loginUser(details: any){ 
-    let result: any;
+ 
     this.isLonginSucess = true;
-    // result =  await this.auth.login(details.value.userId, details.value.userPassword);
-    this.userId = details.value['userId'] ;
-    console.log("details.value['userId']",details.value['userId']);
+    const result =  await this.auth.login(details.value.userId, details.value.userPassword)
+    .subscribe((response:any)=>{
+      if(response.success){
+        localStorage.setItem ('token', response.result.token);
+        this.route.navigate(['/dashboard']);
+        this.sweetAlert.showSuccess(response.message);
+      } else {
+        this.sweetAlert.showError(response.message);
+      }
+    })
+    // this.userId = details.value['userId'] ;
+    // console.log("details.value['userId']",details.value['userId']);
     
-    this.userPassword = details.value['userPassword']
-    if(this.isLonginSucess && (this.userId == 'admin@gmail.com' && this.userPassword == '12345')){
-    this.route.navigate(['/dashboard']);
-    this.sweetAlert.showSuccess("Sucessfully loged in");
-    }else{
-      // this.sweetAlert.showError(result.message);
-      this.sweetAlert.showError("Please enter valid user and password!");
-
-    }
-    // if(this.userId == 'admin@gmail.com' && this.userPassword == '12345'){
-  
-    // } else {
+    // this.userPassword = details.value['userPassword']
+    // if(this.isLonginSucess && (this.userId == 'admin@gmail.com' && this.userPassword == '12345')){
+    // this.route.navigate(['/dashboard']);
+    // this.sweetAlert.showSuccess("Sucessfully loged in");
+    // }else{
+    //   // this.sweetAlert.showError(result.message);
     //   this.sweetAlert.showError("Please enter valid user and password!");
+
     // }
+
   }
 
 }

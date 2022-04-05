@@ -45,6 +45,7 @@ export class UsersComponent implements OnInit {
       "filterType": this.SFCatFilter,
       "selectedValue": "",
     }
+    this.userList  = [];
     this.crudeService.getUserList(requestObj).subscribe(response=>{
       if (response.result.length > 0 && response.success) {
         this.userList = response['result'].map((user: any) => {

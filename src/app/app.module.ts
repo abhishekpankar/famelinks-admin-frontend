@@ -15,7 +15,7 @@ import { CommonService } from './services/common/common.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './user-access/login/login.component';
-
+import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -34,6 +34,7 @@ import { LoginComponent } from './user-access/login/login.component';
     NgBootstrapFormValidationModule,
     ReactiveFormsModule,
    BrowserAnimationsModule,
+   DataTablesModule
   ],
   providers: [CommonService,AppConfigServices,
     {

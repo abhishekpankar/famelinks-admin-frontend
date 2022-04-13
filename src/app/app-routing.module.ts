@@ -30,7 +30,7 @@ const routes: Routes = [
         path: 'reported-data',
         loadChildren: () => import('./view/reported-data/reported-data.module').then(mod => mod.ReportedDataModule),
         data: { title: 'reported-data' },
-        // 'canActivate': [AuthGuard]
+        'canActivate': [AuthGuard]
       },
       {
         path: 'notifications',

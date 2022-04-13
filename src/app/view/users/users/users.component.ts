@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DataTablesModule } from 'angular-datatables';
 import { BucketConstants } from 'src/app/config/project.constant';
 import { SweetAlertsService } from 'src/app/services/sweetMsg/sweet-alerts.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -17,10 +18,11 @@ export class UsersComponent implements OnInit {
   userList:any[] =[];
 
   usersForm: any = FormGroup;
-
+  dtOptions: DataTables.Settings = {};
   constructor(private crudeService:UsersService,private sweetMsg: SweetAlertsService) { }
   
   ngOnInit(): void {
+    
     this.usersForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl(''),
@@ -35,6 +37,10 @@ export class UsersComponent implements OnInit {
       createdDate:new FormControl(),
     });
     this.getUsersList();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      // pageLength: 2
+    };
   }
 
   onTabClick(event: any) {

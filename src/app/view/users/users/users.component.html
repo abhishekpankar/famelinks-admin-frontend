@@ -23,18 +23,18 @@
                       Users</button>
                   </div>
                 </div>
-                <table id="example1" class="table table-bordered table-striped" *ngIf="userList.length > 0 ">
+                <table  datatable [dtOptions]="dtOptions" id="example1" class="table table-bordered table-striped" *ngIf="userList.length > 0 ">
                   <thead>
                     <tr>
                       <th>Sr.No.</th>
                       <th></th>
+                      <th>Type</th>
                       <th>Name</th>
                       <th>User Name</th>
                       <th>Mobile Number</th>
                       <th>Gender</th>
                       <th>Blocked</th>
                       <th>Verification Status</th>
-                      <!-- <th>Referred By</th> -->
                       <th>Verification Video</th>
                       <th>Action</th>
                     </tr>
@@ -43,6 +43,7 @@
                     <tr *ngFor="let data of userList; let index = index">
                       <td>{{index + 1}}</td>
                       <td> <img [src]="data.profileImage" alt="FameLinks Logo"  class="brand-image elevation-3" style="opacity: .8 ; width: 80px;"> </td>
+                      <td>{{data.type ? data.type : "NA"}}</td>
                       <td>{{data.name ? data.name : "NA"}}</td>
                       <td>{{data.username ? data.username : "NA"}}</td>
                       <td>{{data.mobileNumber ? data.mobileNumber :"NA"}}</td>

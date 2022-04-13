@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ERROR_MESSAGES } from 'ng-bootstrap-form-validation';
 import { CUSTOM_ERRORS } from 'src/app/generic-helper/custom-errors';
 import { MatChipsModule } from '@angular/material/chips';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MatChipsModule } from '@angular/material/chips';
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    MatChipsModule
+    MatChipsModule,
+    DataTablesModule
   ],
   providers:[  {
     provide: CUSTOM_ERROR_MESSAGES,

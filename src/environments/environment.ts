@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_URL:"http://192.168.62.44:4000/v1/",
+  BASE_URL:"https://adminapi.famelinks.in/v1/",
   // BASE_URL:"https://adminapi.dev.famelinks.in/v1/",
   MUSIC_BASE_URL:"https://famelinks.s3.ap-south-1.amazonaws.com/funlinks-songs/",
   // MUSIC_BASE_URL:"https://famelinks.s3.ap-south-1.amazonaws.com/funlinks-songs/"

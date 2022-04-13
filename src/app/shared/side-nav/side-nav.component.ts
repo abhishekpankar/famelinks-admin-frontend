@@ -42,10 +42,6 @@ export class SideNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $('[data-widget="treeview"]').Treeview('init');
-    $('[data-widget="treeview"]').Layout('init');
-    $('[data-widget="treeview"]').PushMenu('init');
- 
     this.adminData['username'] = "Famelinks Admin";
 
     let menu = [

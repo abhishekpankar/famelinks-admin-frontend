@@ -23,7 +23,7 @@
                       Users</button>
                   </div>
                 </div>
-                <table  datatable [dtOptions]="dtOptions" id="example1" class="table table-bordered table-striped" *ngIf="userList.length > 0 ">
+                <table  datatable [dtOptions]="dtOptions" id="example1" class="table-bordered table-striped row-border hover" style="max-width: 100%;" *ngIf="userList.length > 0 ">
                   <thead>
                     <tr>
                       <th>Sr.No.</th>
@@ -59,8 +59,8 @@
                       </ng-template>                      
                       <td>
                         <button class="action-btn" mat-flat-button color="primary" (click)="userAction('View',data)">View Details</button>
-                        <button *ngIf="data.verificationStatus === 'Submitted'" class="action-btn" mat-flat-button style="background-color: rgb(16, 179, 30);" (click)="userAction('Approve',data)">Approve</button>
-                        <button *ngIf="data.verificationStatus === 'Submitted' || data.verificationStatus === 'Verified'" class="action-btn" mat-flat-button color="warn" (click)="userAction('Reject',data)">Reject</button>        
+                        <button *ngIf="data.verificationStatus === 'Submitted'||data.verificationStatus === 'Pending'" class="action-btn" mat-flat-button style="background-color: rgb(16, 179, 30);" (click)="userAction('Approve',data)">Approve</button>
+                        <button *ngIf="data.verificationStatus === 'Submitted' || data.verificationStatus === 'Verified' || data.verificationStatus === 'Pending'" class="action-btn" mat-flat-button color="warn" (click)="userAction('Reject',data)">Reject</button>        
                         <!-- <mat-icon  aria-hidden="false" aria-label="View User" class="pointer"  matTooltip="View User Details.." (click)="userAction('View',data)">account_circle</mat-icon>
                         <mat-icon  aria-hidden="false" aria-label="Verify User" class="pointer" matTooltip="verify user.." (click)="userAction('Verify',data)">how_to_reg</mat-icon> -->
                       </td>

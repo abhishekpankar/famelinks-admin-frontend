@@ -39,7 +39,7 @@ export class UsersComponent implements OnInit {
     this.getUsersList();
     this.dtOptions = {
       pagingType: 'full_numbers',
-      // pageLength: 2
+      searching:false
     };
   }
 
